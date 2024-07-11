@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  coturn:
+    image: coturn/coturn:latest
+    container_name: coturn_server
+    restart: unless-stopped
+    network_mode: host  # 使用主机网络模式以支持全范围的端口映射
+    volumes:
+      # 映射配置文件
+      - ./conf/turnserver.conf:/etc/coturn/turnserver.conf
+      # 映射 TLS 证书和私钥（如果使用）
+      - ./certs:/etc/coturn/certs
+
